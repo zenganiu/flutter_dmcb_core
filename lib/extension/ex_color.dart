@@ -1,4 +1,4 @@
-part of dmcb_core;
+part of flutter_dmcb_core;
 
 extension ExColor on Color {
   /// 获取hex颜色

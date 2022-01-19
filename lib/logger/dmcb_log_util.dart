@@ -1,4 +1,4 @@
-part of dmcb_core;
+part of flutter_dmcb_core;
 
 class DmcbLogUtil {
   /// 拿到当前文件名字 和 行号

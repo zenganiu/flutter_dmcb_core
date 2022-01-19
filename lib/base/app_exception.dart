@@ -1,4 +1,4 @@
-part of dmcb_core;
+part of flutter_dmcb_core;
 
 class AppException implements Exception {
   // 错误描述信息

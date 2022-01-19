@@ -1,4 +1,4 @@
-part of dmcb_core;
+part of flutter_dmcb_core;
 
 class DmcbLogConfig {
   /// Whether to display the log in reverse order

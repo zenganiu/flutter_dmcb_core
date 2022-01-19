@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:dmcb_core/dmcb_core.dart';
+import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
 class NetEntity extends ChangeNotifier {
   static const all = "All";

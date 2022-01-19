@@ -1,4 +1,4 @@
-library dmcb_core;
+library flutter_dmcb_core;
 
 import 'dart:io';
 import 'package:flutter/services.dart';

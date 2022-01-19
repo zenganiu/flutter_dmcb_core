@@ -1,4 +1,4 @@
-part of dmcb_core;
+part of flutter_dmcb_core;
 
 extension ExDate on DateTime {
   /// 当前时间是否今天

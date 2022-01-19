@@ -1,4 +1,4 @@
-part of dmcb_core;
+part of flutter_dmcb_core;
 
 class DmcbLogListPage extends StatelessWidget {
   const DmcbLogListPage({Key? key}) : super(key: key);

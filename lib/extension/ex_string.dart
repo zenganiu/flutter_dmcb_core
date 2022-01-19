@@ -1,4 +1,4 @@
-part of dmcb_core;
+part of flutter_dmcb_core;
 
 extension ExString on String {
   String sensorNoEmpty({String defaultValue = '无'}) {
