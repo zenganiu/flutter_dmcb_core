@@ -8,7 +8,7 @@ extension ExDate on DateTime {
   }
 
   /// 格式化输出时间字符串
-  String toFormat({String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
+  String format({String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
     final format = DateFormat(pattern);
     return format.format(this);
   }

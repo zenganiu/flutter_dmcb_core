@@ -39,16 +39,14 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-extension DDDD on Object {
-  String toJson() {
-    return DmcbLogUtil.convertJsonString(this);
-  }
-}
-
 class _MyHomePageState extends State<MyHomePage> {
+  var _counter = 1;
+  var _countDownStr = '00:14:00';
+
+  final timer = DTimer(mInterval: const Duration(seconds: 1).inMilliseconds);
   void _incrementCounter() {
-    DLogger.log(123.toJson());
-    123.toJson();
+    final date = DateTime(2000, 1, 1);
+    debugPrint(date.toString());
   }
 
   @override
@@ -63,10 +61,67 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:\n${DateTime.now().toFormat()}',
-              style: TextStyle(color: '#ff0000'.toColor()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      if (timer.isActive()) return;
+                      timer.setInterval(
+                          const Duration(seconds: 1).inMilliseconds);
+                      _counter = 1;
+                      timer.setOnTimerTickCallback((millisUntilFinished) {
+                        setState(() {
+                          _counter += 1;
+                        });
+                      });
+                      timer.startTimer();
+                    },
+                    child: const Text('开始')),
+                TextButton(
+                    onPressed: () {
+                      if (timer.isActive()) return;
+                      timer.setInterval(
+                          const Duration(milliseconds: 1).inMilliseconds);
+                      timer.setTotalTime(
+                          const Duration(seconds: 100).inMilliseconds);
+                      timer.setOnTimerTickCallback((millisUntilFinished) {
+                        setState(() {
+                          final duration =
+                              Duration(milliseconds: millisUntilFinished);
+                          _countDownStr = DateTime(
+                            2000,
+                            1,
+                            1,
+                            duration.inHours % 24,
+                            duration.inMinutes % 60,
+                            duration.inSeconds % 60,
+                            duration.inMilliseconds % 1000,
+                          ).format(pattern: 'HH:mm:ss.S');
+                        });
+                      });
+                      timer.startCountDown();
+                    },
+                    child: const Text('倒计时')),
+                TextButton(
+                    onPressed: () {
+                      timer.cancel();
+                    },
+                    child: const Text('取消')),
+              ],
             ),
+            Column(
+              children: [
+                Text(
+                  '$_counter',
+                  style: TextStyle(color: '#ff0000'.toColor()),
+                ),
+                Text(
+                  _countDownStr,
+                  style: TextStyle(color: '#ff0000'.toColor()),
+                ),
+              ],
+            )
           ],
         ),
       ),

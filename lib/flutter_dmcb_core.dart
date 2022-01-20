@@ -1,5 +1,6 @@
 library flutter_dmcb_core;
 
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'logger/log_widget.dart';
 import 'logger/log_entity.dart';
 import 'package:crypto/crypto.dart';
 
+part 'base/dmcb_timer.dart';
 part 'base/app_exception.dart';
 part 'base/dmcb_core_util.dart';
 part 'extension/ex_color.dart';
