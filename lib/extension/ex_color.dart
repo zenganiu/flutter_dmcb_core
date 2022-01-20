@@ -2,7 +2,7 @@ part of flutter_dmcb_core;
 
 extension ExColor on Color {
   /// 获取hex颜色
-  String get toHexString {
+  String get toHex {
     final sb = StringBuffer();
     sb.write('#');
     sb.write(red.toRadixString(16).padLeft(2, '0'));

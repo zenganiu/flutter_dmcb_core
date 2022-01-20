@@ -9,6 +9,7 @@ import 'logger/net_widget.dart';
 import 'logger/net_entity.dart';
 import 'logger/log_widget.dart';
 import 'logger/log_entity.dart';
+import 'package:crypto/crypto.dart';
 
 part 'base/app_exception.dart';
 part 'base/dmcb_core_util.dart';

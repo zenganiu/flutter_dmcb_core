@@ -22,12 +22,12 @@ extension ExString on String {
     }
   }
 
-  // /// md5加密
-  // String toMD5() {
-  //   var content = const Utf8Encoder().convert(this);
-  //   var digest = md5.convert(content);
-  //   return digest.toString();
-  // }
+  /// md5加密
+  String toMD5() {
+    var content = const Utf8Encoder().convert(this);
+    var digest = md5.convert(content);
+    return digest.toString();
+  }
 
   /// 是否是手机号码
   bool isPhone() {
