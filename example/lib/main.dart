@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
@@ -11,6 +14,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final json = <String, dynamic>{
+      'name': '你好',
+      'age': 12,
+      'friends': {
+        'totalCount': 12,
+        'list': [
+          '1',
+          '2',
+        ],
+        'aa': {
+          'name': '213',
+          'age': '2012-12-12 12:12:00',
+          'count': 1,
+        }
+      }
+    };
+
+    final value = getJsonValue(json['friends']['aa'], <String, dynamic>{});
+
+    print(value);
+    print(value.runtimeType);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -27,6 +52,13 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
+  }
+
+  T getJsonValue<T>(dynamic value, T defaultValue) {
+    if (value is T) {
+      return value;
+    }
+    return defaultValue;
   }
 }
 
@@ -45,8 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final timer = DTimer(mInterval: const Duration(seconds: 1).inMilliseconds);
   void _incrementCounter() {
-    final date = DateTime(2000, 1, 1);
-    debugPrint(date.toString());
+    final t = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+      if (kDebugMode) {
+        print(timer.tick);
+      }
+    });
   }
 
   @override
