@@ -7,7 +7,10 @@ class AppException implements Exception {
   // 错误码
   final String code;
 
-  AppException({required this.code, this.message});
+  // 额外参数
+  final Object? extraData;
+
+  AppException({required this.code, this.message, this.extraData});
 
   @override
   String toString() {
