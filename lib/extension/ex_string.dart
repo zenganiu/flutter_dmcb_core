@@ -35,7 +35,7 @@ extension ExString on String {
         r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
   }
 
-  /// hideNumber
+  /// 隐藏手机号码中间4位
   String hideNumber({int start = 3, int end = 7, String replacement = '****'}) {
     if (start < 0 || length < end || start > end) return this;
     return replaceRange(start, end, replacement);
