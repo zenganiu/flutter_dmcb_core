@@ -1,4 +1,6 @@
-part of flutter_dmcb_core;
+library flutter_dmcb_core;
+
+import 'package:intl/intl.dart';
 
 extension ExDate on DateTime {
   /// 当前时间是否今天

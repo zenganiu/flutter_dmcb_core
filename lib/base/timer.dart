@@ -1,4 +1,6 @@
-part of flutter_dmcb_core;
+library flutter_dmcb_core;
+
+import 'dart:async';
 
 ///timer callback.(millisUntilFinished 毫秒).
 typedef OnTimerTickCallback = void Function(int millisUntilFinished);

@@ -1,4 +1,6 @@
-part of flutter_dmcb_core;
+library flutter_dmcb_core;
+
+import 'package:flutter/material.dart';
 
 extension ExColor on Color {
   /// 获取hex颜色

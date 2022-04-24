@@ -1,4 +1,9 @@
-part of flutter_dmcb_core;
+library flutter_dmcb_core;
+
+import 'dart:convert' as convert;
+
+import 'package:crypto/crypto.dart';
+import 'package:flutter/material.dart';
 
 extension ExString on String {
   String sensorNoEmpty({String defaultValue = '无'}) {
@@ -24,15 +29,14 @@ extension ExString on String {
 
   /// md5加密
   String toMD5() {
-    var content = const Utf8Encoder().convert(this);
+    var content = const convert.Utf8Encoder().convert(this);
     var digest = md5.convert(content);
     return digest.toString();
   }
 
   /// 是否是手机号码
   bool isPhone() {
-    return regExpMatch(
-        r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+    return regExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
   }
 
   /// 隐藏手机号码中间4位
