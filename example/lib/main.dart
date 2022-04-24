@@ -78,9 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final timer = DTimer(mInterval: const Duration(seconds: 1).inMilliseconds);
   void _incrementCounter() {
     final t = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      if (kDebugMode) {
+      if (DUtils.isDebug) {
         print(timer.tick);
       }
+
+
     });
   }
 

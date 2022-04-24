@@ -1,7 +1,7 @@
 library flutter_dmcb_core;
 
 export 'base/timer.dart';
-export 'base/util.dart';
+export 'util/util.dart';
 export 'extension/ex_color.dart';
 export 'extension/ex_date.dart';
 export 'extension/ex_list.dart';
