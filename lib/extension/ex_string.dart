@@ -5,7 +5,10 @@ import 'dart:convert' as convert;
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 
-extension ExString on String {
+extension DcmbExString on String {
+  /// 字符串空处理 (''或null)
+  ///
+  /// [defaultValue] 默认值,默认: 无
   String sensorNoEmpty({String defaultValue = '无'}) {
     var str = this;
     if (str.isEmpty || str == 'null') {
@@ -15,6 +18,8 @@ extension ExString on String {
   }
 
   /// hex转换成Color对象
+  ///
+  /// [defaultColor] 默认颜色，默认为黑色
   Color toColor({Color defaultColor = Colors.black}) {
     final sb = StringBuffer();
     if (length == 6 || length == 7) sb.write('ff');
@@ -39,8 +44,12 @@ extension ExString on String {
     return regExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
   }
 
-  /// 隐藏手机号码中间4位
-  String hideNumber({int start = 3, int end = 7, String replacement = '****'}) {
+  /// 字符串替换
+  ///
+  /// [start] 起始位置
+  /// [end] 结束位置
+  /// [replacement] 替换内容
+  String replaceString({int start = 3, int end = 7, String replacement = '****'}) {
     if (start < 0 || length < end || start > end) return this;
     return replaceRange(start, end, replacement);
   }

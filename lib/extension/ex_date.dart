@@ -2,7 +2,7 @@ library flutter_dmcb_core;
 
 import 'package:intl/intl.dart';
 
-extension ExDate on DateTime {
+extension DcmbExDate on DateTime {
   /// 当前时间是否今天
   bool get isToday {
     final cur = DateTime.now();
@@ -10,6 +10,8 @@ extension ExDate on DateTime {
   }
 
   /// 格式化输出时间字符串
+  ///
+  /// [pattern] 模式，默认yyyy-MM-dd HH:mm:ss
   String format({String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
     final format = DateFormat(pattern);
     return format.format(this);

@@ -13,11 +13,11 @@ void main() {
       expect('#ff0000'.toColor(), const Color(0xffff0000));
       expect(''.sensorNoEmpty(), '无');
       expect('123'.sensorNoEmpty(), '123');
-      expect('17688454587'.hideNumber(), '176****4587');
-      expect('17688'.hideNumber(), '17688');
-      expect('17688'.hideNumber(end: 5), '176****');
-      expect('17688'.hideNumber(start: 6, end: 5), '17688');
-      expect('17688'.hideNumber(start: 1, end: 2, replacement: '#'), '1#688');
+      expect('17688454587'.replaceString(), '176****4587');
+      expect('17688'.replaceString(), '17688');
+      expect('17688'.replaceString(end: 5), '176****');
+      expect('17688'.replaceString(start: 6, end: 5), '17688');
+      expect('17688'.replaceString(start: 1, end: 2, replacement: '#'), '1#688');
       expect('123456'.reverse(), '654321');
       expect('12345'.reverse(), '54321');
       expect('12'.reverse(), '21');

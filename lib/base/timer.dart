@@ -25,13 +25,17 @@ class DTimer {
 
   OnTimerTickCallback? _onTimerTickCallback;
 
-  /// 设置Timer间隔.单位毫秒
+  /// 设置Timer间隔
+  ///
+  /// [interval] 间隔.单位毫秒
   void setInterval(int interval) {
     if (interval <= 0) interval = Duration.millisecondsPerSecond;
     mInterval = interval;
   }
 
-  /// 设置倒计时总时间.单位毫秒
+  /// 设置倒计时
+  ///
+  /// [totalTime] 总时间.单位毫秒
   void setTotalTime(int totalTime) {
     if (totalTime <= 0) return;
     mTotalTime = totalTime;
@@ -79,7 +83,9 @@ class DTimer {
     }
   }
 
-  /// 重设倒计时总时间.单位毫秒
+  /// 重设倒计时
+  ///
+  /// [totalTime] 总时间.单位毫秒
   void updateTotalTime(int totalTime) {
     cancel();
     mTotalTime = totalTime;

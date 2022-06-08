@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:example/home.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
@@ -14,51 +15,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final json = <String, dynamic>{
-      'name': '你好',
-      'age': 12,
-      'friends': {
-        'totalCount': 12,
-        'list': [
-          '1',
-          '2',
-        ],
-        'aa': {
-          'name': '213',
-          'age': '2012-12-12 12:12:00',
-          'count': 1,
-        }
-      }
-    };
-
-    final value = getJsonValue(json['friends']['aa'], <String, dynamic>{});
-
-    print(value);
-    print(value.runtimeType);
-
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomePage(title: 'Home Page'),
     );
-  }
-
-  T getJsonValue<T>(dynamic value, T defaultValue) {
-    if (value is T) {
-      return value;
-    }
-    return defaultValue;
   }
 }
 
@@ -81,8 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
       if (DUtils.isDebug) {
         print(timer.tick);
       }
-
-
     });
   }
 
@@ -104,8 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 TextButton(
                     onPressed: () {
                       if (timer.isActive()) return;
-                      timer.setInterval(
-                          const Duration(seconds: 1).inMilliseconds);
+                      timer.setInterval(const Duration(seconds: 1).inMilliseconds);
                       _counter = 1;
                       timer.setOnTimerTickCallback((millisUntilFinished) {
                         setState(() {
@@ -118,14 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 TextButton(
                     onPressed: () {
                       if (timer.isActive()) return;
-                      timer.setInterval(
-                          const Duration(milliseconds: 1).inMilliseconds);
-                      timer.setTotalTime(
-                          const Duration(seconds: 100).inMilliseconds);
+                      timer.setInterval(const Duration(milliseconds: 1).inMilliseconds);
+                      timer.setTotalTime(const Duration(seconds: 100).inMilliseconds);
                       timer.setOnTimerTickCallback((millisUntilFinished) {
                         setState(() {
-                          final duration =
-                              Duration(milliseconds: millisUntilFinished);
+                          final duration = Duration(milliseconds: millisUntilFinished);
                           _countDownStr = DateTime(
                             2000,
                             1,

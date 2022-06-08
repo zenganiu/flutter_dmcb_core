@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 /// 页面缓存功能组件
-class KeepAliveWrapper extends StatefulWidget {
+class DKeepAliveWrapper extends StatefulWidget {
   final bool keepAlive;
   final Widget child;
-  const KeepAliveWrapper({
+  const DKeepAliveWrapper({
     Key? key,
     this.keepAlive = true,
     required this.child,
   }) : super(key: key);
 
   @override
-  _KeepAliveWrapperState createState() => _KeepAliveWrapperState();
+  _DKeepAliveWrapperState createState() => _DKeepAliveWrapperState();
 }
 
-class _KeepAliveWrapperState extends State<KeepAliveWrapper> with AutomaticKeepAliveClientMixin {
+class _DKeepAliveWrapperState extends State<DKeepAliveWrapper> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -22,7 +22,7 @@ class _KeepAliveWrapperState extends State<KeepAliveWrapper> with AutomaticKeepA
   }
 
   @override
-  void didUpdateWidget(covariant KeepAliveWrapper oldWidget) {
+  void didUpdateWidget(covariant DKeepAliveWrapper oldWidget) {
     if (oldWidget.keepAlive != widget.keepAlive) {
       updateKeepAlive();
     }

@@ -9,9 +9,7 @@ import 'util.dart';
 
 mixin DMethod {
   /// 强制退出应用
-  void forceExitApp() {
-    exit(0);
-  }
+  void forceExitApp() => exit(0);
 
   /// 转换成json字符串
   String convertJsonString(Object value) {

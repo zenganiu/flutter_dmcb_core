@@ -2,7 +2,7 @@ library flutter_dmcb_core;
 
 import 'package:flutter/material.dart';
 
-extension ExColor on Color {
+extension DcmbExColor on Color {
   /// 获取hex颜色
   String get toHex {
     final sb = StringBuffer();

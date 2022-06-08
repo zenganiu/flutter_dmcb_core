@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 
 typedef SliverHeaderBuilder = Widget Function(BuildContext context, double shrinkOffset, bool overlapsContent);
 
-class SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
+class DSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double maxHeight;
   final double minHeight;
   final SliverHeaderBuilder builder;
 
-  SliverHeaderDelegate({
+  DSliverHeaderDelegate({
     required this.maxHeight,
     this.minHeight = 0,
     required Widget child,
   })  : builder = ((a, b, c) => child),
         assert(minHeight <= maxHeight && minHeight >= 0);
 
-  SliverHeaderDelegate.fixedHeight({
+  DSliverHeaderDelegate.fixedHeight({
     required double height,
     required Widget child,
   })  : builder = ((a, b, c) => child),
         maxHeight = height,
         minHeight = height;
 
-  SliverHeaderDelegate.builder({
+  DSliverHeaderDelegate.builder({
     required this.maxHeight,
     this.minHeight = 0,
     required this.builder,
@@ -40,7 +40,7 @@ class SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => minHeight;
 
   @override
-  bool shouldRebuild(covariant SliverHeaderDelegate oldDelegate) {
+  bool shouldRebuild(covariant DSliverHeaderDelegate oldDelegate) {
     return oldDelegate.maxExtent != maxExtent || oldDelegate.minExtent != minExtent;
   }
 }
