@@ -1,17 +1,9 @@
-library flutter_dmcb_core;
-
 import 'dart:async';
 
-///timer callback.(millisUntilFinished 毫秒).
-typedef OnTimerTickCallback = void Function(int millisUntilFinished);
+typedef OnTimerCountdownCallback = void Function(int millisUntilFinished);
 
-/// 定时器
-class DTimer {
-  DTimer({
-    this.mInterval = Duration.millisecondsPerSecond,
-    this.mTotalTime = 0,
-  });
-
+/// 倒计时
+class DTimerCountdown {
   /// 定时器
   Timer? _mTimer;
 
@@ -19,21 +11,26 @@ class DTimer {
   bool _isActive = false;
 
   /// Timer间隔 单位毫秒，默认1000毫秒(1秒).
-  int mInterval;
+  int mDuration;
 
   /// 倒计时总时间,单位毫秒
   int mTotalTime;
 
   /// 定时器回调
-  OnTimerTickCallback? _onTimerTickCallback;
+  OnTimerCountdownCallback? _onTimerCountdownCallback;
+
+  DTimerCountdown({
+    this.mDuration = Duration.millisecondsPerSecond,
+    this.mTotalTime = 0,
+  });
 
   /// 设置Timer间隔
   ///
   /// [interval] 间隔,单位毫秒,小于0将默认1秒
-  void setInterval(int interval) {
+  void setDuration(int interval) {
     assert(interval > 0, '间隔应该大于0');
     if (interval <= 0) interval = Duration.millisecondsPerSecond;
-    mInterval = interval;
+    mDuration = interval;
   }
 
   /// 设置倒计时
@@ -45,27 +42,16 @@ class DTimer {
     mTotalTime = totalTime;
   }
 
-  /// 启动定时Timer.
-  void startTimer() {
-    if (_isActive || mInterval <= 0) return;
-    _isActive = true;
-    Duration duration = Duration(milliseconds: mInterval);
-    _doCallback(0);
-    _mTimer = Timer.periodic(duration, (Timer timer) {
-      _doCallback(timer.tick);
-    });
-  }
-
   /// 启动倒计时Timer.
   void startCountDown() {
-    if (_isActive || mInterval <= 0 || mTotalTime <= 0) return;
+    if (_isActive || mDuration <= 0 || mTotalTime <= 0) return;
     _isActive = true;
-    Duration duration = Duration(milliseconds: mInterval);
+    Duration duration = Duration(milliseconds: mDuration);
     _doCallback(mTotalTime);
     _mTimer = Timer.periodic(duration, (Timer timer) {
-      int time = mTotalTime - mInterval;
+      int time = mTotalTime - mDuration;
       mTotalTime = time;
-      if (time >= mInterval) {
+      if (time >= mDuration) {
         _doCallback(time);
       } else if (time == 0) {
         _doCallback(time);
@@ -81,34 +67,23 @@ class DTimer {
     });
   }
 
+  void setOnTimerCountdownCallback(void Function(int) callback) {
+    _onTimerCountdownCallback = callback;
+  }
+
   void _doCallback(int time) {
-    if (_onTimerTickCallback != null) {
-      _onTimerTickCallback!(time);
+    if (_onTimerCountdownCallback != null) {
+      _onTimerCountdownCallback!(time);
     }
   }
 
-  /// 重设倒计时
-  ///
-  /// [totalTime] 总时间.单位毫秒
-  void updateTotalTime(int totalTime) {
-    cancel();
-    mTotalTime = totalTime;
-    startCountDown();
-  }
-
   /// Timer是否启动.
-  bool isActive() {
-    return _isActive;
-  }
+  bool get isActive => _isActive;
 
   /// 取消计时器.
   void cancel() {
     _mTimer?.cancel();
     _mTimer = null;
     _isActive = false;
-  }
-
-  void setOnTimerTickCallback(OnTimerTickCallback callback) {
-    _onTimerTickCallback = callback;
   }
 }

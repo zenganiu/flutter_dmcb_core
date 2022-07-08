@@ -9,7 +9,7 @@ class TimerPage extends StatefulWidget {
 }
 
 class _TimerPageState extends State<TimerPage> {
-  final timer = DTimer(mInterval: const Duration(seconds: 1).inMilliseconds, mTotalTime: 15 * 60 * 1000);
+  final timer = DTimerCountdown(mDuration: const Duration(seconds: 1).inMilliseconds, mTotalTime: 15 * 60 * 1000);
   var _countDownStr = '';
   @override
   Widget build(BuildContext context) {
@@ -22,11 +22,11 @@ class _TimerPageState extends State<TimerPage> {
           ListTile(
             title: Text('开始倒计时:$_countDownStr'),
             onTap: () {
-              if (timer.isActive()) {
+              if (timer.isActive) {
                 return;
               }
               timer.setTotalTime(20 * 60 * 30 * 1000);
-              timer.setOnTimerTickCallback((millisUntilFinished) {
+              timer.setOnTimerCountdownCallback((millisUntilFinished) {
                 setState(() {
                   final duration = Duration(milliseconds: millisUntilFinished);
                   _countDownStr = DateTime(
