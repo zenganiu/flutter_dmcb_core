@@ -5,13 +5,14 @@ import 'dart:async';
 ///timer callback.(millisUntilFinished 毫秒).
 typedef OnTimerTickCallback = void Function(int millisUntilFinished);
 
+/// 定时器
 class DTimer {
   DTimer({
     this.mInterval = Duration.millisecondsPerSecond,
     this.mTotalTime = 0,
   });
 
-  /// Timer.
+  /// 定时器
   Timer? _mTimer;
 
   /// Timer是否启动.
@@ -21,22 +22,25 @@ class DTimer {
   int mInterval;
 
   /// 倒计时总时间,单位毫秒
-  int mTotalTime; //单位毫秒
+  int mTotalTime;
 
+  /// 定时器回调
   OnTimerTickCallback? _onTimerTickCallback;
 
   /// 设置Timer间隔
   ///
-  /// [interval] 间隔.单位毫秒
+  /// [interval] 间隔,单位毫秒,小于0将默认1秒
   void setInterval(int interval) {
+    assert(interval > 0, '间隔应该大于0');
     if (interval <= 0) interval = Duration.millisecondsPerSecond;
     mInterval = interval;
   }
 
   /// 设置倒计时
   ///
-  /// [totalTime] 总时间.单位毫秒
+  /// [totalTime] 总时间,单位毫秒,
   void setTotalTime(int totalTime) {
+    assert(totalTime > 0, '总时间应该大于0');
     if (totalTime <= 0) return;
     mTotalTime = totalTime;
   }

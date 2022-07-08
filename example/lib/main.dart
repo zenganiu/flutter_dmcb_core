@@ -1,9 +1,7 @@
 import 'dart:async';
-
-import 'package:example/home.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
+import 'home_page.dart';
 
 void main() {
   runApp(const MyApp());

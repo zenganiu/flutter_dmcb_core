@@ -7,7 +7,19 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GeneratedPluginRegistrant.register(with: self)
+      GeneratedPluginRegistrant.register(with: self)
+      
+      var env = "release"
+      #if DEBUG
+      env = "debug"
+      #elseif PROFILE
+      env = "profile"
+      #endif
+      
+      print(env)
+      
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+      
+      
   }
 }
