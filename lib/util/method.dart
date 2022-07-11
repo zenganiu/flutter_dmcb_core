@@ -36,7 +36,7 @@ mixin DMethod {
   }
 
   /// hex颜色
-  Color formHex(String hex, {Color defaultColor = Colors.black}) {
+  Color fromHex(String hex, {Color defaultColor = Colors.black}) {
     return hex.toColor(defaultColor: defaultColor);
   }
 

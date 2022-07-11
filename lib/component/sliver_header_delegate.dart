@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-typedef SliverHeaderBuilder = Widget Function(BuildContext context, double shrinkOffset, bool overlapsContent);
+typedef DSliverHeaderBuilder = Widget Function(BuildContext context, double shrinkOffset, bool overlapsContent);
 
 class DSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double maxHeight;
   final double minHeight;
-  final SliverHeaderBuilder builder;
+  final DSliverHeaderBuilder builder;
 
   DSliverHeaderDelegate({
     required this.maxHeight,
