@@ -19,6 +19,7 @@ class DTimerCountdown {
   /// 定时器回调
   OnTimerCountdownCallback? _onTimerCountdownCallback;
 
+  /// 初始化
   DTimerCountdown({
     this.mDuration = Duration.millisecondsPerSecond,
     this.mTotalTime = 0,

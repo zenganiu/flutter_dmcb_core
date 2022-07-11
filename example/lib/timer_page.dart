@@ -20,13 +20,14 @@ class _TimerPageState extends State<TimerPage> {
       body: ListView(
         children: [
           ListTile(
-            title: Text('开始倒计时:$_countDownStr'),
+            title: Text('点击开始倒计时:$_countDownStr'),
             onTap: () {
               if (timer.isActive) {
                 return;
               }
-              timer.setTotalTime(20 * 60 * 30 * 1000);
+              timer.setTotalTime(10 * 1000);
               timer.setOnTimerCountdownCallback((millisUntilFinished) {
+                debugPrint('$millisUntilFinished');
                 setState(() {
                   final duration = Duration(milliseconds: millisUntilFinished);
                   _countDownStr = DateTime(
@@ -37,7 +38,7 @@ class _TimerPageState extends State<TimerPage> {
                     duration.inMinutes % 60,
                     duration.inSeconds % 60,
                     duration.inMilliseconds % 1000,
-                  ).format(pattern: 'hh:mm:ss');
+                  ).format(pattern: 'HH:mm:ss');
                 });
               });
               timer.startCountDown();
