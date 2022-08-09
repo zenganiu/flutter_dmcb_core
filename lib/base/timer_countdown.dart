@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter_dmcb_core/extension/ex_date.dart';
+import 'package:intl/intl.dart';
+
 typedef OnTimerCountdownCallback = void Function(int millisUntilFinished);
 
 /// 倒计时
@@ -11,19 +14,20 @@ class DTimerCountdown {
   bool _isActive = false;
 
   /// Timer间隔 单位毫秒，默认1000毫秒(1秒).
-  int mDuration;
+  int _duration;
 
   /// 倒计时总时间,单位毫秒
-  int mTotalTime;
+  int _totalTime;
 
   /// 定时器回调
   OnTimerCountdownCallback? _onTimerCountdownCallback;
 
   /// 初始化
   DTimerCountdown({
-    this.mDuration = Duration.millisecondsPerSecond,
-    this.mTotalTime = 0,
-  });
+    int duration = Duration.millisecondsPerSecond,
+    int totalTime = 0,
+  })  : _duration = duration,
+        _totalTime = totalTime;
 
   /// 设置Timer间隔
   ///
@@ -31,7 +35,13 @@ class DTimerCountdown {
   void setDuration(int interval) {
     assert(interval > 0, '间隔应该大于0');
     if (interval <= 0) interval = Duration.millisecondsPerSecond;
-    mDuration = interval;
+    _duration = interval;
+  }
+
+  void setDurationFromSecond(int interval) {
+    assert(interval > 0, '间隔应该大于0');
+    if (interval <= 0) interval = Duration.millisecondsPerSecond;
+    _duration = Duration(seconds: interval).inMilliseconds;
   }
 
   /// 设置倒计时
@@ -40,19 +50,25 @@ class DTimerCountdown {
   void setTotalTime(int totalTime) {
     assert(totalTime > 0, '总时间应该大于0');
     if (totalTime <= 0) return;
-    mTotalTime = totalTime;
+    _totalTime = totalTime;
+  }
+
+  void stop() {
+    if (_isActive) {
+      _mTimer?.cancel();
+    }
   }
 
   /// 启动倒计时Timer.
   void startCountDown() {
-    if (_isActive || mDuration <= 0 || mTotalTime <= 0) return;
+    if (_isActive || _duration <= 0 || _totalTime <= 0) return;
     _isActive = true;
-    Duration duration = Duration(milliseconds: mDuration);
-    _doCallback(mTotalTime);
+    Duration duration = Duration(milliseconds: _duration);
+    _doCallback(_totalTime);
     _mTimer = Timer.periodic(duration, (Timer timer) {
-      int time = mTotalTime - mDuration;
-      mTotalTime = time;
-      if (time >= mDuration) {
+      int time = _totalTime - _duration;
+      _totalTime = time;
+      if (time >= _duration) {
         _doCallback(time);
       } else if (time == 0) {
         _doCallback(time);
@@ -60,7 +76,7 @@ class DTimerCountdown {
       } else {
         timer.cancel();
         Future.delayed(Duration(milliseconds: time), () {
-          mTotalTime = 0;
+          _totalTime = 0;
           _doCallback(0);
           cancel();
         });
@@ -86,5 +102,38 @@ class DTimerCountdown {
     _mTimer?.cancel();
     _mTimer = null;
     _isActive = false;
+  }
+}
+
+/// 倒计时输入格式
+enum DTimerCountdownFormat {
+  /// 时分秒
+  hourMinuteSecond,
+
+  /// 分秒
+  minuteSecond,
+
+  /// 秒
+  second,
+}
+
+extension ExCountdownFormat on DTimerCountdownFormat {
+  String format(int millisUntilFinished) {
+    final seconds = millisUntilFinished ~/ 1000;
+    switch (this) {
+      case DTimerCountdownFormat.hourMinuteSecond:
+        final hour = (seconds ~/ 3600).floor();
+        final minute = ((seconds / 60) % 60).floor();
+        final second = (seconds % 60).floor();
+        final formatter = NumberFormat('00');
+        return '$hour:${formatter.format(minute)}:${formatter.format(second)}';
+      case DTimerCountdownFormat.minuteSecond:
+        final minute = (seconds ~/ 60).floor();
+        final second = (seconds % 60).floor();
+        final formatter = NumberFormat('00');
+        return '$minute:${formatter.format(second)}';
+      case DTimerCountdownFormat.second:
+        return '${seconds.floor()}';
+    }
   }
 }
