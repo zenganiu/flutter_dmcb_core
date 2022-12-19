@@ -6,6 +6,7 @@ export 'extension/ex_color.dart';
 export 'extension/ex_date.dart';
 export 'extension/ex_list.dart';
 export 'extension/ex_string.dart';
+export 'extension/ex_map.dart';
 export 'base/app_exception.dart';
 
 export 'component/keep_alive_wrapper.dart';

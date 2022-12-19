@@ -39,6 +39,15 @@ extension DcmbExString on String {
     return digest.toString();
   }
 
+  /// 转为int
+  int? toInt() {
+    try {
+      return int.tryParse(this);
+    } catch (e) {
+      return null;
+    }
+  }
+
   /// 是否是手机号码
   bool isPhone() {
     return regExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
@@ -68,5 +77,10 @@ extension DcmbExString on String {
   bool regExpMatch(String expStr) {
     RegExp exp = RegExp(expStr);
     return exp.hasMatch(this);
+  }
+
+  /// 移除所有空格
+  String trimAll() {
+    return replaceAll(RegExp(r"\s+\b|\b\s"), "");
   }
 }
