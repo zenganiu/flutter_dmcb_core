@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_dmcb_core/extension/ex_date.dart';
 import 'package:intl/intl.dart';
 
-typedef OnTimerCountdownCallback = void Function(int millisUntilFinished);
+typedef DOnTimerCountdownCallback = void Function(int millisUntilFinished);
 
 /// 倒计时
 class DTimerCountdown {
@@ -20,7 +20,7 @@ class DTimerCountdown {
   int _totalTime;
 
   /// 定时器回调
-  OnTimerCountdownCallback? _onTimerCountdownCallback;
+  DOnTimerCountdownCallback? _onTimerCountdownCallback;
 
   /// 初始化
   DTimerCountdown({
