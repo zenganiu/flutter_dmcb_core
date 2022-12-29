@@ -25,13 +25,13 @@ void main() {
     });
 
     test('ExDate', () {
-      expect(DateTime.now().isToday, true);
-      expect(DateTime.now().add(const Duration(days: 1)).isToday, false);
-      expect(DateTime(2000, 1, 1).format(pattern: 'yyyy-MM-dd'), '2000-01-01');
-      expect(DateTime(2000, 12, 1).format(pattern: 'yyyy/MM/dd'), '2000/12/01');
-      expect(DateTime(2000, 1, 1, 11, 11, 11).format(pattern: 'HH:mm:ss'),
+      expect(DateTime.now().dmIsToday, true);
+      expect(DateTime.now().add(const Duration(days: 1)).dmIsToday, false);
+      expect(DateTime(2000, 1, 1).dmFormat(pattern: 'yyyy-MM-dd'), '2000-01-01');
+      expect(DateTime(2000, 12, 1).dmFormat(pattern: 'yyyy/MM/dd'), '2000/12/01');
+      expect(DateTime(2000, 1, 1, 11, 11, 11).dmFormat(pattern: 'HH:mm:ss'),
           '11:11:11');
-      expect(DateTime(2000, 1, 1, 01, 02, 13).format(pattern: 'mm:ss'),
+      expect(DateTime(2000, 1, 1, 01, 02, 13).dmFormat(pattern: 'mm:ss'),
           '02:13');
     });
 
