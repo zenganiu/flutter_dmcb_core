@@ -5,20 +5,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dmcb_core/extension/ex_string.dart';
 
-import 'util.dart';
-
 mixin DMethod {
   /// 强制退出应用
   void forceExitApp() => exit(0);
 
   /// 转换成json字符串
+  @Deprecated('使用`jsonEncode`代替')
   String convertJsonString(Object value) {
+    return jsonEncode(value, defValue: '')!;
+  }
+
+  /// 转换成json字符串,失败将返回defValue
+  String? jsonEncode(Object? value, {String? defValue}) {
     try {
-      final jsStr = json.encode(value);
-      return jsStr;
+      final res = json.encode(value);
+      return res;
     } catch (e) {
-      final jsStr = value.toString();
-      return jsStr;
+      return defValue;
+    }
+  }
+
+  /// json解码
+  dynamic jsonDecode(String value) {
+    try {
+      final res = json.decode(value);
+      return res;
+    } catch (e) {
+      return null;
     }
   }
 
@@ -37,7 +50,7 @@ mixin DMethod {
 
   /// hex颜色
   Color fromHex(String hex, {Color defaultColor = Colors.black}) {
-    return hex.toColor(defaultColor: defaultColor);
+    return hex.dmToColor(defaultColor: defaultColor);
   }
 
   T? convert<T>(dynamic value) {

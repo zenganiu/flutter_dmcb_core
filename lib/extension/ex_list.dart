@@ -4,7 +4,6 @@ extension DcmbExList<E> on List<E> {
   /// 安全的获取首个元素
   E? get dmSafeFirst {
     if (isEmpty) return null;
-
     return first;
   }
 
