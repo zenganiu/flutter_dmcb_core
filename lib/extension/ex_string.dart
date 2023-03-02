@@ -17,11 +17,6 @@ extension DcmbExString on String {
     return str;
   }
 
-  @Deprecated('使用`dmSensorNoEmpty`代替')
-  String sensorNoEmpty({String defaultValue = '无'}) {
-    return dmSensorNoEmpty(defaultValue: defaultValue);
-  }
-
   /// hex转换成Color对象
   ///
   /// [defaultColor] 默认颜色，默认为黑色
@@ -37,21 +32,11 @@ extension DcmbExString on String {
     }
   }
 
-  @Deprecated('使用`dmToColor`代替')
-  Color toColor({Color defaultColor = Colors.black}) {
-    return dmToColor(defaultColor: defaultColor);
-  }
-
   /// md5加密
   String dmToMD5() {
     var content = const convert.Utf8Encoder().convert(this);
     var digest = md5.convert(content);
     return digest.toString();
-  }
-
-  @Deprecated('使用`dmToMD5`代替')
-  String toMD5() {
-    return dmToMD5();
   }
 
   /// 转为int
@@ -63,19 +48,18 @@ extension DcmbExString on String {
     }
   }
 
-  @Deprecated('使用`dmToInt`代替')
-  int? toInt() {
-    return dmToInt();
+  /// 转为double
+  double? dmToDouble() {
+    try {
+      return double.tryParse(this);
+    } catch (e) {
+      return null;
+    }
   }
 
   /// 是否是手机号码
   bool dmIsPhone() {
     return dmRegExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
-  }
-
-  @Deprecated('使用`dmIsPhone`代替')
-  bool isPhone() {
-    return dmIsPhone();
   }
 
   /// 字符串替换
@@ -88,11 +72,6 @@ extension DcmbExString on String {
     return replaceRange(start, end, replacement);
   }
 
-  @Deprecated('使用`dmReplaceString`代替')
-  String replaceString({int start = 3, int end = 7, String replacement = '****'}) {
-    return dmReplaceString(start: start, end: end, replacement: replacement);
-  }
-
   /// 反转字符串
   String dmReverse() {
     if (isEmpty) return '';
@@ -103,20 +82,10 @@ extension DcmbExString on String {
     return sb.toString();
   }
 
-  @Deprecated('使用`dmReverse`代替')
-  String reverse() {
-    return dmReverse();
-  }
-
   /// 正则判断
   bool dmRegExpMatch(String expStr) {
     RegExp exp = RegExp(expStr);
     return exp.hasMatch(this);
-  }
-
-  @Deprecated('使用`dmRegExpMatch`代替')
-  bool regExpMatch(String expStr) {
-    return dmRegExpMatch(expStr);
   }
 
   /// 移除所有空格
@@ -124,8 +93,16 @@ extension DcmbExString on String {
     return replaceAll(RegExp(r"\s+\b|\b\s"), "");
   }
 
-  @Deprecated('使用`dmTrimAll`代替')
-  String trimAll() {
-    return dmTrimAll();
+  /// 是否是空
+  bool get dmIsBlank => trim().isEmpty;
+
+  /// 是否是正确的url
+  bool get dmIsUrl {
+    if (dmIsBlank) {
+      return false;
+    }
+    final regex =
+        RegExp(r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)');
+    return regex.hasMatch(this);
   }
 }

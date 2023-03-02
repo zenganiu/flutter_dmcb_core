@@ -10,9 +10,4 @@ extension DcmbExMap<K, V> on Map<K, V> {
       return '{}';
     }
   }
-
-  @Deprecated('使用`dmToJsonStr`代替')
-  String get toJsonStr {
-    return dmToJsonStr;
-  }
 }

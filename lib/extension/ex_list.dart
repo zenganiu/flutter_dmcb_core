@@ -7,21 +7,11 @@ extension DcmbExList<E> on List<E> {
     return first;
   }
 
-  @Deprecated('使用`dmSafeFirst`代替')
-  E? get safeFirst {
-    return dmSafeFirst;
-  }
-
   /// 安全的获取最后一个元素
   E? get dmSafeLast {
     if (isEmpty) return null;
 
     return last;
-  }
-
-  @Deprecated('使用`dmSafeLast`代替')
-  E? get safeLast {
-    return dmSafeLast;
   }
 
   /// 安全的获取索引对应的元素
@@ -31,10 +21,5 @@ extension DcmbExList<E> on List<E> {
       return null;
     }
     return this[idx];
-  }
-
-  @Deprecated('使用`dmSafeIndex`代替')
-  E? safeIndex(int idx) {
-    return dmSafeIndex(idx);
   }
 }
