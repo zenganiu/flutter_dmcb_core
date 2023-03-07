@@ -1,5 +1,3 @@
-library flutter_dmcb_core;
-
 class DAppException implements Exception {
   /// 错误码
   final String code;

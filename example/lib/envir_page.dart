@@ -29,6 +29,7 @@ class _EnvirPageState extends State<EnvirPage> {
               isRelease: ${DUtils.isRelease}
               isIOS: ${DUtils.isIOS}
               isAndroid: ${DUtils.isAndroid}
+              isPlatformDarkMode: ${DUtils.isPlatformDarkMode}
               ''',
             ),
           ),
