@@ -6,6 +6,9 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 
 extension DcmbExString on String {
+  /// 是否是空
+  bool get dmIsBlank => trim().isEmpty;
+
   /// 字符串空处理 (''或null)
   ///
   /// [defaultValue] 默认值,默认: 无
@@ -82,27 +85,34 @@ extension DcmbExString on String {
     return sb.toString();
   }
 
+  /// 移除所有空格
+  String dmTrimAll() {
+    return replaceAll(RegExp(r"\s+\b|\b\s"), "");
+  }
+
   /// 正则判断
   bool dmRegExpMatch(String expStr) {
     RegExp exp = RegExp(expStr);
     return exp.hasMatch(this);
   }
 
-  /// 移除所有空格
-  String dmTrimAll() {
-    return replaceAll(RegExp(r"\s+\b|\b\s"), "");
-  }
-
-  /// 是否是空
-  bool get dmIsBlank => trim().isEmpty;
-
   /// 是否是正确的url
   bool get dmIsUrl {
     if (dmIsBlank) {
       return false;
     }
-    final regex =
-        RegExp(r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)');
-    return regex.hasMatch(this);
+    final res = dmRegExpMatch(
+        r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)');
+    return res;
+  }
+
+  /// 是否是身份证号码
+  bool get dmIsIDNumber {
+    if (dmIsBlank) {
+      return false;
+    }
+    final res = dmRegExpMatch(
+        r'^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$');
+    return res;
   }
 }
