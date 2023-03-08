@@ -22,6 +22,12 @@ void main() {
       expect('12345'.dmReverse(), '54321');
       expect('12'.dmReverse(), '21');
       expect('1'.dmReverse(), '1');
+      expect('13777777777'.dmIsPhone(), true);
+      expect('1377777777'.dmIsPhone(), false);
+      expect('1377777777'.dmIsUrl(), false);
+      expect('http://www.hao123.com'.dmIsUrl(), true);
+      expect('https://www.hao123.com'.dmIsUrl(), true);
+      expect('https:www.hao123.com'.dmIsUrl(), false);
     });
 
     test('ExDate', () {

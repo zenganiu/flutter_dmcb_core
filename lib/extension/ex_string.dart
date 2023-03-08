@@ -97,7 +97,7 @@ extension DcmbExString on String {
   }
 
   /// 是否是正确的url
-  bool get dmIsUrl {
+  bool dmIsUrl() {
     if (dmIsBlank) {
       return false;
     }
