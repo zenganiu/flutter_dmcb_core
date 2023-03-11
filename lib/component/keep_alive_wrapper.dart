@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// 页面缓存功能组件
 class DKeepAliveWrapper extends StatefulWidget {
+  /// 是否保活
   final bool keepAlive;
   final Widget child;
   const DKeepAliveWrapper({
