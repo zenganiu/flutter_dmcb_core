@@ -28,6 +28,7 @@ void main() {
       expect('http://www.hao123.com'.dmIsUrl(), true);
       expect('https://www.hao123.com'.dmIsUrl(), true);
       expect('https:www.hao123.com'.dmIsUrl(), false);
+      expect('https://hao123.com'.dmIsUrl(), false);
     });
 
     test('ExDate', () {

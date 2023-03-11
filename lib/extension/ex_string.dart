@@ -60,11 +60,6 @@ extension DcmbExString on String {
     }
   }
 
-  /// 是否是手机号码
-  bool dmIsPhone() {
-    return dmRegExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
-  }
-
   /// 字符串替换
   ///
   /// [start] 起始位置
@@ -94,6 +89,11 @@ extension DcmbExString on String {
   bool dmRegExpMatch(String expStr) {
     RegExp exp = RegExp(expStr);
     return exp.hasMatch(this);
+  }
+
+  /// 是否是手机号码
+  bool dmIsPhone() {
+    return dmRegExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
   }
 
   /// 是否是正确的url
