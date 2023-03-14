@@ -1,3 +1,4 @@
+/// 异常
 class DAppException implements Exception {
   /// 错误码
   final String code;
@@ -13,6 +14,6 @@ class DAppException implements Exception {
 
   @override
   String toString() {
-    return 'code: $code,\n message: ${message ?? '未知错误'} \n extraData: ${extraData.toString()}';
+    return 'DAppException{code: $code, message: $message, extraData: $extraData}';
   }
 }
