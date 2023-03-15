@@ -50,5 +50,19 @@ void main() {
       expect([1, 3, 3].dmSafeFirst, 1);
       expect([1, 2].dmSafeLast, 2);
     });
+
+    test('JsonMap', () {
+      final map = {
+        'name': 'tom',
+        'age': 12,
+      };
+      final js = DJsonMap(map);
+      expect(js['name'].stringOrEmpty, 'tom');
+      expect(js['name1'].stringOrEmpty, '');
+      expect(js['name1'].string, null);
+      expect(js['age'].intOrZero, 12);
+      expect(js['age1'].intOrZero, 0);
+      expect(js['age'].intValue, 12);
+    });
   });
 }
