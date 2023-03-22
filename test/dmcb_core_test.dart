@@ -63,6 +63,7 @@ void main() {
       expect(js['age'].intOrZero, 12);
       expect(js['age1'].intOrZero, 0);
       expect(js['age'].intValue, 12);
+      expect(js['age'][0]['11'].intValue, null);
     });
   });
 }
