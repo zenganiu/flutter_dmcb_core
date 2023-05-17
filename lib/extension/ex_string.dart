@@ -6,6 +6,9 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 
 extension DcmbExString on String {
+  /// 是否是空
+  bool get dmIsBlank => trim().isEmpty;
+
   /// 字符串空处理 (''或null)
   ///
   /// [defaultValue] 默认值,默认: 无
@@ -15,11 +18,6 @@ extension DcmbExString on String {
       str = '无';
     }
     return str;
-  }
-
-  @Deprecated('使用`dmSensorNoEmpty`代替')
-  String sensorNoEmpty({String defaultValue = '无'}) {
-    return dmSensorNoEmpty(defaultValue: defaultValue);
   }
 
   /// hex转换成Color对象
@@ -37,21 +35,11 @@ extension DcmbExString on String {
     }
   }
 
-  @Deprecated('使用`dmToColor`代替')
-  Color toColor({Color defaultColor = Colors.black}) {
-    return dmToColor(defaultColor: defaultColor);
-  }
-
   /// md5加密
   String dmToMD5() {
     var content = const convert.Utf8Encoder().convert(this);
     var digest = md5.convert(content);
     return digest.toString();
-  }
-
-  @Deprecated('使用`dmToMD5`代替')
-  String toMD5() {
-    return dmToMD5();
   }
 
   /// 转为int
@@ -63,19 +51,13 @@ extension DcmbExString on String {
     }
   }
 
-  @Deprecated('使用`dmToInt`代替')
-  int? toInt() {
-    return dmToInt();
-  }
-
-  /// 是否是手机号码
-  bool dmIsPhone() {
-    return dmRegExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
-  }
-
-  @Deprecated('使用`dmIsPhone`代替')
-  bool isPhone() {
-    return dmIsPhone();
+  /// 转为double
+  double? dmToDouble() {
+    try {
+      return double.tryParse(this);
+    } catch (e) {
+      return null;
+    }
   }
 
   /// 字符串替换
@@ -88,11 +70,6 @@ extension DcmbExString on String {
     return replaceRange(start, end, replacement);
   }
 
-  @Deprecated('使用`dmReplaceString`代替')
-  String replaceString({int start = 3, int end = 7, String replacement = '****'}) {
-    return dmReplaceString(start: start, end: end, replacement: replacement);
-  }
-
   /// 反转字符串
   String dmReverse() {
     if (isEmpty) return '';
@@ -103,9 +80,9 @@ extension DcmbExString on String {
     return sb.toString();
   }
 
-  @Deprecated('使用`dmReverse`代替')
-  String reverse() {
-    return dmReverse();
+  /// 移除所有空格
+  String dmTrimAll() {
+    return replaceAll(RegExp(r"\s+\b|\b\s"), "");
   }
 
   /// 正则判断
@@ -114,18 +91,28 @@ extension DcmbExString on String {
     return exp.hasMatch(this);
   }
 
-  @Deprecated('使用`dmRegExpMatch`代替')
-  bool regExpMatch(String expStr) {
-    return dmRegExpMatch(expStr);
+  /// 是否是手机号码
+  bool dmIsPhone() {
+    return dmRegExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
   }
 
-  /// 移除所有空格
-  String dmTrimAll() {
-    return replaceAll(RegExp(r"\s+\b|\b\s"), "");
+  /// 是否是正确的url
+  bool dmIsUrl() {
+    if (dmIsBlank) {
+      return false;
+    }
+    final res = dmRegExpMatch(
+        r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)');
+    return res;
   }
 
-  @Deprecated('使用`dmTrimAll`代替')
-  String trimAll() {
-    return dmTrimAll();
+  /// 是否是身份证号码
+  bool get dmIsIDNumber {
+    if (dmIsBlank) {
+      return false;
+    }
+    final res = dmRegExpMatch(
+        r'^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$');
+    return res;
   }
 }

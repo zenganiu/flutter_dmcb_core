@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_dmcb_core/extension/ex_date.dart';
 import 'package:intl/intl.dart';
 
 typedef DOnTimerCountdownCallback = void Function(int millisUntilFinished);

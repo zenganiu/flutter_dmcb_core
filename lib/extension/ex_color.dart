@@ -12,9 +12,4 @@ extension DcmbExColor on Color {
     sb.write(blue.toRadixString(16).padLeft(2, '0'));
     return sb.toString();
   }
-
-  @Deprecated('使用`dmToHex`代替')
-  String get toHex {
-    return dmToHex;
-  }
 }
