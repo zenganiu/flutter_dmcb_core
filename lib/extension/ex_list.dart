@@ -10,7 +10,6 @@ extension DcmbExList<E> on List<E> {
   /// 安全的获取最后一个元素
   E? get dmSafeLast {
     if (isEmpty) return null;
-
     return last;
   }
 
