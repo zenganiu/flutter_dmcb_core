@@ -9,17 +9,6 @@ extension DcmbExString on String {
   /// 是否是空
   bool get dmIsBlank => trim().isEmpty;
 
-  /// 字符串空处理 (''或null)
-  ///
-  /// [defaultValue] 默认值,默认: 无
-  String dmSensorNoEmpty({String defaultValue = '无'}) {
-    var str = this;
-    if (str.isEmpty || str == 'null') {
-      str = '无';
-    }
-    return str;
-  }
-
   /// hex转换成Color对象
   ///
   /// [defaultColor] 默认颜色，默认为黑色
