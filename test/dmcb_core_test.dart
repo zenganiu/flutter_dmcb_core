@@ -11,8 +11,6 @@ void main() {
       expect('17688454587'.dmIsPhone(), true);
       expect('11688454587'.dmIsPhone(), false);
       expect('#ff0000'.dmToColor(), const Color(0xffff0000));
-      expect(''.dmSensorNoEmpty(), '无');
-      expect('123'.dmSensorNoEmpty(), '123');
       expect('17688454587'.dmReplaceString(), '176****4587');
       expect('17688'.dmReplaceString(), '17688');
       expect('17688'.dmReplaceString(end: 5), '176****');
@@ -29,11 +27,21 @@ void main() {
       expect('https://www.hao123.com'.dmIsUrl(), true);
       expect('https:www.hao123.com'.dmIsUrl(), false);
       expect('https://hao123.com'.dmIsUrl(), false);
+
+      expect('https://hao123.com'.dmIsBlank, false);
+      expect('1 1'.dmIsBlank, false);
+      expect(' '.dmIsBlank, true);
+      expect('  '.dmIsBlank, true);
+      expect('     '.dmIsBlank, true);
     });
 
     test('ExDate', () {
       expect(DateTime.now().dmIsToday, true);
-      expect(DateTime.now().add(const Duration(days: 1)).dmIsToday, false);
+      expect(DateTime(2200, 1, 1).dmIsToday, false);
+
+      expect(DateTime(2000, 1, 1).dmIsPast, true);
+      expect(DateTime(2023, 8, 17).dmIsPast, true);
+      expect(DateTime(2200, 1, 1).dmIsPast, false);
       expect(DateTime(2000, 1, 1).dmFormat(pattern: 'yyyy-MM-dd'), '2000-01-01');
       expect(DateTime(2000, 12, 1).dmFormat(pattern: 'yyyy/MM/dd'), '2000/12/01');
       expect(DateTime(2000, 1, 1, 11, 11, 11).dmFormat(pattern: 'HH:mm:ss'), '11:11:11');
@@ -49,6 +57,8 @@ void main() {
       expect([].dmSafeLast, null);
       expect([1, 3, 3].dmSafeFirst, 1);
       expect([1, 2].dmSafeLast, 2);
+      expect([1, 2].dmSafeFirstWhere((e) => e == 2), 2);
+      expect([1, 2].dmSafeFirstWhere((e) => e == 21), null);
     });
 
     test('JsonMap', () {

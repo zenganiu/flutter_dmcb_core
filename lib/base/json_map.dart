@@ -1,4 +1,5 @@
 /// json数据map
+@Deprecated("下版本将移除,请使用d_json库")
 class DJsonMap {
   /// 数据
   final dynamic value;

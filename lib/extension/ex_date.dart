@@ -16,4 +16,7 @@ extension DcmbExDate on DateTime {
     final format = DateFormat(pattern);
     return format.format(this);
   }
+
+  /// 时间是否是过去
+  bool get dmIsPast => isBefore(DateTime.now());
 }

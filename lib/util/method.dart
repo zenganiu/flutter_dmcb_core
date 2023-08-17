@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'dart:convert' as convert;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -12,17 +12,17 @@ mixin DMethod {
   /// 转换成json字符串,失败将返回defValue
   String? jsonEncode(Object? value, {String? defValue}) {
     try {
-      final res = json.encode(value);
+      final res = convert.jsonEncode(value);
       return res;
     } catch (e) {
       return defValue;
     }
   }
 
-  /// json解码
+  /// json解码,失败返回null
   dynamic jsonDecode(String value) {
     try {
-      final res = json.decode(value);
+      final res = convert.jsonDecode(value);
       return res;
     } catch (e) {
       return null;

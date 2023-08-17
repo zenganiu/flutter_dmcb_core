@@ -5,14 +5,15 @@ class DKeepAliveWrapper extends StatefulWidget {
   /// 是否保活
   final bool keepAlive;
   final Widget child;
+
   const DKeepAliveWrapper({
-    Key? key,
+    super.key,
     this.keepAlive = true,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
-  _DKeepAliveWrapperState createState() => _DKeepAliveWrapperState();
+  State<DKeepAliveWrapper> createState() => _DKeepAliveWrapperState();
 }
 
 class _DKeepAliveWrapperState extends State<DKeepAliveWrapper> with AutomaticKeepAliveClientMixin {
