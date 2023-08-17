@@ -4,6 +4,7 @@ import 'dart:convert' as convert;
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
 extension DcmbExString on String {
   /// 是否是空
@@ -86,6 +87,7 @@ extension DcmbExString on String {
   }
 
   /// 是否是正确的url
+  @Deprecated("有问题,请谨慎使用")
   bool dmIsUrl() {
     if (dmIsBlank) {
       return false;
@@ -104,4 +106,7 @@ extension DcmbExString on String {
         r'^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$');
     return res;
   }
+
+  /// jsonString转换为对象
+  dynamic get dmToJson => DUtils.jsonDecode(this);
 }
