@@ -11,10 +11,10 @@ class DMeasureSize extends StatefulWidget {
 
   /// 初始化
   const DMeasureSize({
+    super.key,
     required this.onChange,
     required this.child,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   State<DMeasureSize> createState() => _DMeasureSizeState();

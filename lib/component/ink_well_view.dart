@@ -28,7 +28,7 @@ class DInkWellView extends StatelessWidget {
 
   /// 构造函数
   const DInkWellView({
-    Key? key,
+    super.key,
     required this.child,
     this.onPressed,
     this.borderRadius = const BorderRadius.all(Radius.circular(0)),
@@ -36,7 +36,7 @@ class DInkWellView extends StatelessWidget {
     this.highlightColor = const Color(0xffeeeeee),
     this.width,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
