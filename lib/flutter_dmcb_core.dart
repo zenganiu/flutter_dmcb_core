@@ -14,3 +14,5 @@ export 'extension/ex_map.dart';
 
 export 'component/keep_alive_wrapper.dart';
 export 'component/sliver_header_delegate.dart';
+export 'component/measure_size.dart';
+export 'component/ink_well_view.dart';
