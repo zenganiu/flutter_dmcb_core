@@ -12,7 +12,7 @@ Flutter基础库
 ```yml
 dependencies:
   flutter_dmcb_core:
-    git: https://codeup.aliyun.com/5e97f942f89c9700014a4f00/dmc-front/flutter_components/flutter_dmcb_core.git
+    git: https://github.com/zenganiu/flutter_dmcb_core.git
 ```
 
 ## 使用
@@ -21,7 +21,7 @@ dependencies:
 ```dart
 
 // 导入
-import 'package:flutter_dmcb_core/flutter_dmcb_core.dart'; 
+import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
 DUtils.width // 屏幕宽度
 DUtils.height // 屏幕高度
@@ -40,3 +40,5 @@ DUtils.isPlatformDarkMode // 是否暗黑模式
 ```
 
 * 扩展(Extension)
+
+

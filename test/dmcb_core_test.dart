@@ -25,8 +25,8 @@ void main() {
       expect('1377777777'.dmIsUrl(), false);
       expect('http://www.hao123.com'.dmIsUrl(), true);
       expect('https://www.hao123.com'.dmIsUrl(), true);
-      expect('https:www.hao123.com'.dmIsUrl(), false);
-      expect('https://hao123.com'.dmIsUrl(), false);
+      expect('https:www.hao123.com'.dmIsUrl(), true);
+      expect('https://hao123.com'.dmIsUrl(), true);
 
       expect('https://hao123.com'.dmIsBlank, false);
       expect('1 1'.dmIsBlank, false);

@@ -20,6 +20,7 @@ class _EnvirPageState extends State<EnvirPage> {
           ListTile(
             title: Text(
               '''
+              
               width: ${DUtils.width},height: ${DUtils.height},
               pixelRatio: ${DUtils.pixelRatio},
               statusBarHeight: ${DUtils.statusBarHeight},
