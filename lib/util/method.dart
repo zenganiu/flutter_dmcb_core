@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dmcb_core/extension/ex_date.dart';
 import 'package:flutter_dmcb_core/extension/ex_string.dart';
+import 'package:intl/intl.dart';
 
 mixin DMethod {
   /// 强制退出应用
@@ -45,5 +47,25 @@ mixin DMethod {
   /// hex颜色
   Color fromHex(String hex, {Color defaultColor = Colors.black}) {
     return hex.dmToColor(defaultColor: defaultColor);
+  }
+
+  /// 格式化金额
+  static String moneyFormat(double amount, {String format = "#,##0.00"}) {
+    NumberFormat fm = NumberFormat(format);
+    return fm.format(amount);
+  }
+
+  /// 格式化时间,不符合将返回原值
+  static String dateFormat(dynamic dateTime, {String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
+    var fm = dateTime.toString();
+    if (dateTime is String) {
+      final date = DateTime.tryParse(dateTime);
+      if (date != null) {
+        return date.dmFormat(pattern: pattern);
+      }
+    } else if (dateTime is DateTime) {
+      return dateTime.dmFormat(pattern: pattern);
+    }
+    return fm;
   }
 }
