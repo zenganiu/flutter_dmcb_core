@@ -50,13 +50,13 @@ mixin DMethod {
   }
 
   /// 格式化金额
-  static String moneyFormat(double amount, {String format = "#,##0.00"}) {
+  String moneyFormat(double amount, {String format = "#,##0.00"}) {
     NumberFormat fm = NumberFormat(format);
     return fm.format(amount);
   }
 
   /// 格式化时间,不符合将返回原值
-  static String dateFormat(dynamic dateTime, {String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
+  String dateFormat(dynamic dateTime, {String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
     var fm = dateTime.toString();
     if (dateTime is String) {
       final date = DateTime.tryParse(dateTime);
