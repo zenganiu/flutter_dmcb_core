@@ -1,7 +1,5 @@
 library flutter_dmcb_core;
 
-import 'dart:convert' as convert;
-
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
 extension DcmbExList<E> on List<E> {
