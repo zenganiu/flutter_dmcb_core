@@ -27,6 +27,9 @@ mixin DProperty {
   /// 是否Windows平台
   bool get isWindows => Platform.isWindows;
 
+  /// 是否移动端 iOS/Android
+  bool get isMobile => isAndroid || isIOS;
+
   /// 像素密度
   double get pixelRatio => ui.window.devicePixelRatio;
 
