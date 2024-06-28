@@ -2,7 +2,6 @@ library flutter_dmcb_core;
 
 export 'base/timer_countdown.dart';
 export 'base/app_exception.dart';
-export 'base/json_map.dart';
 
 export 'util/util.dart';
 

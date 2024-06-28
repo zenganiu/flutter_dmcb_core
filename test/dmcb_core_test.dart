@@ -60,20 +60,5 @@ void main() {
       expect([1, 2].dmSafeFirstWhere((e) => e == 2), 2);
       expect([1, 2].dmSafeFirstWhere((e) => e == 21), null);
     });
-
-    test('JsonMap', () {
-      final map = {
-        'name': 'tom',
-        'age': 12,
-      };
-      final js = DJsonMap(map);
-      expect(js['name'].stringOrEmpty, 'tom');
-      expect(js['name1'].stringOrEmpty, '');
-      expect(js['name1'].string, null);
-      expect(js['age'].intOrZero, 12);
-      expect(js['age1'].intOrZero, 0);
-      expect(js['age'].intValue, 12);
-      expect(js['age'][0]['11'].intValue, null);
-    });
   });
 }

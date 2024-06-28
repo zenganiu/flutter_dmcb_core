@@ -65,6 +65,9 @@ mixin DMethod {
       }
     } else if (dateTime is DateTime) {
       return dateTime.dmFormat(pattern: pattern);
+    } else if (dateTime is int) {
+      final date = DateTime.fromMillisecondsSinceEpoch(dateTime);
+      return date.dmFormat(pattern: pattern);
     }
     return fm;
   }
