@@ -37,10 +37,11 @@ class DTimerCountdown {
     _duration = interval;
   }
 
+  /// 设置Timer间隔
+  ///
+  /// [interval] 间隔,单位秒,小于0将默认1秒
   void setDurationFromSecond(int interval) {
-    assert(interval > 0, '间隔应该大于0');
-    if (interval <= 0) interval = Duration.millisecondsPerSecond;
-    _duration = Duration(seconds: interval).inMilliseconds;
+    setDuration(interval * 1000);
   }
 
   /// 设置倒计时
@@ -50,6 +51,13 @@ class DTimerCountdown {
     assert(totalTime > 0, '总时间应该大于0');
     if (totalTime <= 0) return;
     _totalTime = totalTime;
+  }
+
+  /// 设置倒计时
+  ///
+  /// [totalTime] 总时间,单位秒,
+  void setTotalTimeWithSecond(int totalTime) {
+    setTotalTime(totalTime * 1000);
   }
 
   void stop() {
@@ -104,35 +112,45 @@ class DTimerCountdown {
   }
 }
 
-/// 倒计时输入格式
+/// 倒计时输出格式
+@Deprecated("use [DTimerFormat]")
 enum DTimerCountdownFormat {
-  /// 时分秒
+  /// 时分秒, 00:00:00
   hourMinuteSecond,
 
-  /// 分秒
+  /// 分秒,00:00
   minuteSecond,
 
-  /// 秒
+  /// 秒,0
   second,
 }
 
+@Deprecated("use [ExDTimerFormat]")
 extension ExCountdownFormat on DTimerCountdownFormat {
+  /// 倒计时输出格式化
+  /// [millisUntilFinished] 计时毫秒数
   String format(int millisUntilFinished) {
     final seconds = millisUntilFinished ~/ 1000;
+    return formatWithSeconds(seconds);
+  }
+
+  /// 倒计时输出格式化
+  /// [secondUntilFinished] 计时秒数
+  String formatWithSeconds(int secondUntilFinished) {
     switch (this) {
       case DTimerCountdownFormat.hourMinuteSecond:
-        final hour = (seconds ~/ 3600).floor();
-        final minute = ((seconds / 60) % 60).floor();
-        final second = (seconds % 60).floor();
+        final hour = (secondUntilFinished ~/ 3600).floor();
+        final minute = ((secondUntilFinished / 60) % 60).floor();
+        final second = (secondUntilFinished % 60).floor();
         final formatter = NumberFormat('00');
         return '$hour:${formatter.format(minute)}:${formatter.format(second)}';
       case DTimerCountdownFormat.minuteSecond:
-        final minute = (seconds ~/ 60).floor();
-        final second = (seconds % 60).floor();
+        final minute = (secondUntilFinished ~/ 60).floor();
+        final second = (secondUntilFinished % 60).floor();
         final formatter = NumberFormat('00');
         return '$minute:${formatter.format(second)}';
       case DTimerCountdownFormat.second:
-        return '${seconds.floor()}';
+        return '${secondUntilFinished.floor()}';
     }
   }
 }
