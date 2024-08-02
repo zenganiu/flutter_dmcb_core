@@ -1,6 +1,8 @@
 library flutter_dmcb_core;
 
 export 'base/timer_countdown.dart';
+export 'base/timer_counter.dart';
+export 'base/timer_format.dart';
 export 'base/app_exception.dart';
 
 export 'util/util.dart';

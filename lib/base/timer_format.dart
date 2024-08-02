@@ -22,13 +22,7 @@ extension ExDTimerFormat on DTimerFormat {
   /// 倒计时输出格式化
   /// [millisUntilFinished] 计时毫秒数
   String format(int millisUntilFinished) {
-    final seconds = millisUntilFinished ~/ 1000;
-    return formatWithSeconds(seconds);
-  }
-
-  /// 倒计时输出格式化
-  /// [secondUntilFinished] 计时秒数
-  String formatWithSeconds(int secondUntilFinished) {
+    int secondUntilFinished = millisUntilFinished ~/ 1000;
     switch (this) {
       case DTimerFormat.hourMinuteSecond:
         final hour = (secondUntilFinished ~/ 3600).floor();
@@ -44,18 +38,25 @@ extension ExDTimerFormat on DTimerFormat {
       case DTimerFormat.second:
         return '${secondUntilFinished.floor()}';
       case DTimerFormat.minuteSecondMilliseconds:
-        final milliseconds = secondUntilFinished % 1000;
+        final milliseconds = millisUntilFinished % 1000;
         final minute = (secondUntilFinished ~/ 60).floor();
         final second = (secondUntilFinished % 60).floor();
         final formatter = NumberFormat('00');
         return '$minute:${formatter.format(second)}:${NumberFormat('000').format(milliseconds)}';
       case DTimerFormat.hourMinuteSecondMilliseconds:
-        final milliseconds = secondUntilFinished % 1000;
+        final milliseconds = millisUntilFinished % 1000;
         final hour = (secondUntilFinished ~/ 3600).floor();
         final minute = ((secondUntilFinished / 60) % 60).floor();
         final second = (secondUntilFinished % 60).floor();
         final formatter = NumberFormat('00');
         return '$hour:${formatter.format(minute)}:${formatter.format(second)}:${NumberFormat('000').format(milliseconds)}';
     }
+  }
+
+  /// 倒计时输出格式化
+  /// [secondUntilFinished] 计时秒数
+  String formatWithSeconds(int secondUntilFinished) {
+    final seconds = secondUntilFinished * 1000;
+    return format(seconds);
   }
 }

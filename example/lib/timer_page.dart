@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dmcb_core/base/timer_format.dart';
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
 class TimerPage extends StatefulWidget {
@@ -17,6 +18,10 @@ class _TimerPageState extends State<TimerPage> {
 
   final timer2 = DTimerCountdown();
   var _countDownStr2 = '';
+
+  final timer3 = DTimerCounter(duration: 1);
+  var _counterStr = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +69,7 @@ class _TimerPageState extends State<TimerPage> {
           ListTile(
             title: Text('ss点击开始倒计时: $_countDownStr2'),
             onTap: () {
-              final d = Duration(hours: 1,seconds: 60);
+              final d = Duration(hours: 1, seconds: 60);
               print(d.inMilliseconds);
 
               if (timer2.isActive) {
@@ -81,6 +86,23 @@ class _TimerPageState extends State<TimerPage> {
               timer2.startCountDown();
             },
           ),
+          const Divider(),
+          ListTile(
+            title: Text('mm:ss点击计时: $_counterStr'),
+            onTap: () {
+              if (timer3.isActive) {
+                return;
+              }
+              timer3.setOnTimerCounterCallback((millisUntilFinished) {
+                if (mounted) {
+                  setState(() {
+                    _counterStr = DTimerFormat.minuteSecondMilliseconds.format(millisUntilFinished);
+                  });
+                }
+              });
+              timer3.startCounter();
+            },
+          ),
         ],
       ),
     );
@@ -91,6 +113,7 @@ class _TimerPageState extends State<TimerPage> {
     timer.cancel();
     timer1.cancel();
     timer2.cancel();
+    timer3.cancel();
     super.dispose();
   }
 }

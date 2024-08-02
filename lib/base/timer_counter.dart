@@ -39,6 +39,10 @@ class DTimerCounter {
     }
   }
 
+  void setOnTimerCounterCallback(void Function(int) callback) {
+    _onTimerCounterCallback = callback;
+  }
+
   void _doCallback(int count) {
     _onTimerCounterCallback?.call(count);
   }
