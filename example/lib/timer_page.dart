@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dmcb_core/base/timer_format.dart';
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
 class TimerPage extends StatefulWidget {
@@ -19,7 +18,7 @@ class _TimerPageState extends State<TimerPage> {
   final timer2 = DTimerCountdown();
   var _countDownStr2 = '';
 
-  final timer3 = DTimerCounter(duration: 1);
+  final timer3 = DTimerCounter(duration: 1000);
   var _counterStr = '';
 
   @override
@@ -40,7 +39,7 @@ class _TimerPageState extends State<TimerPage> {
               timer.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
-                    _countDownStr = DTimerCountdownFormat.hourMinuteSecond.format(millisUntilFinished);
+                    _countDownStr = DTimerFormat.hourMinuteSecond.format(millisUntilFinished);
                   });
                 }
               });
@@ -58,7 +57,7 @@ class _TimerPageState extends State<TimerPage> {
               timer1.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
-                    _countDownStr1 = DTimerCountdownFormat.minuteSecond.format(millisUntilFinished);
+                    _countDownStr1 = DTimerFormat.minuteSecond.format(millisUntilFinished);
                   });
                 }
               });
@@ -79,7 +78,7 @@ class _TimerPageState extends State<TimerPage> {
               timer2.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
-                    _countDownStr2 = DTimerCountdownFormat.second.format(millisUntilFinished);
+                    _countDownStr2 = DTimerFormat.second.format(millisUntilFinished);
                   });
                 }
               });
@@ -96,7 +95,7 @@ class _TimerPageState extends State<TimerPage> {
               timer3.setOnTimerCounterCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
-                    _counterStr = DTimerFormat.minuteSecondMilliseconds.format(millisUntilFinished);
+                    _counterStr = DTimerFormat.hourMinuteSecond.formatWithSeconds(millisUntilFinished);
                   });
                 }
               });
