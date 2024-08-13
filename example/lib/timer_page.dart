@@ -18,7 +18,7 @@ class _TimerPageState extends State<TimerPage> {
   final timer2 = DTimerCountdown();
   var _countDownStr2 = '';
 
-  final timer3 = DTimerCounter(duration: 1000);
+  final timer3 = DTimerCounter(interval: 1000);
   var _counterStr = '';
 
   @override

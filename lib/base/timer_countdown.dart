@@ -13,7 +13,7 @@ class DTimerCountdown {
   bool _isActive = false;
 
   /// Timer间隔 单位毫秒，默认1000毫秒(1秒).
-  int _duration;
+  int _interval;
 
   /// 倒计时总时间,单位毫秒
   int _totalTime;
@@ -23,9 +23,9 @@ class DTimerCountdown {
 
   /// 初始化
   DTimerCountdown({
-    int duration = Duration.millisecondsPerSecond,
+    int interval = Duration.millisecondsPerSecond,
     int totalTime = 0,
-  })  : _duration = duration,
+  })  : _interval = interval,
         _totalTime = totalTime;
 
   /// 设置Timer间隔
@@ -34,7 +34,7 @@ class DTimerCountdown {
   void setDuration(int interval) {
     assert(interval > 0, '间隔应该大于0');
     if (interval <= 0) interval = Duration.millisecondsPerSecond;
-    _duration = interval;
+    _interval = interval;
   }
 
   /// 设置Timer间隔
@@ -68,14 +68,14 @@ class DTimerCountdown {
 
   /// 启动倒计时Timer.
   void startCountDown() {
-    if (_isActive || _duration <= 0 || _totalTime <= 0) return;
+    if (_isActive || _interval <= 0 || _totalTime <= 0) return;
     _isActive = true;
-    Duration duration = Duration(milliseconds: _duration);
+    Duration duration = Duration(milliseconds: _interval);
     _doCallback(_totalTime);
     _mTimer = Timer.periodic(duration, (Timer timer) {
-      int time = _totalTime - _duration;
+      int time = _totalTime - _interval;
       _totalTime = time;
-      if (time >= _duration) {
+      if (time >= _interval) {
         _doCallback(time);
       } else if (time == 0) {
         _doCallback(time);
