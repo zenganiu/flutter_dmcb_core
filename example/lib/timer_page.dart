@@ -35,7 +35,7 @@ class _TimerPageState extends State<TimerPage> {
               if (timer.isActive) {
                 return;
               }
-              timer.setTotalTime(61 * 60 * 1000);
+              timer.setTotalTimeWithSecond(120);
               timer.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
@@ -53,7 +53,7 @@ class _TimerPageState extends State<TimerPage> {
               if (timer1.isActive) {
                 return;
               }
-              timer1.setTotalTime(11 * 60 * 1000);
+              timer1.setTotalTimeWithSecond(11 * 60);
               timer1.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
@@ -70,11 +70,11 @@ class _TimerPageState extends State<TimerPage> {
             onTap: () {
               final d = Duration(hours: 1, seconds: 60);
               print(d.inMilliseconds);
-
+              print(d.inSeconds);
               if (timer2.isActive) {
                 return;
               }
-              timer2.setTotalTime(120 * 1000);
+              timer2.setTotalTimeWithSecond(120);
               timer2.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
