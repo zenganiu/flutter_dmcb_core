@@ -17,6 +17,10 @@ class _TimerPageState extends State<TimerPage> {
 
   final timer2 = DTimerCountdown();
   var _countDownStr2 = '';
+
+  final timer3 = DTimerCounter(interval: 1000);
+  var _counterStr = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +35,11 @@ class _TimerPageState extends State<TimerPage> {
               if (timer.isActive) {
                 return;
               }
-              timer.setTotalTime(61 * 60 * 1000);
+              timer.setTotalTimeWithSecond(120);
               timer.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
-                    _countDownStr = DTimerCountdownFormat.hourMinuteSecond.format(millisUntilFinished);
+                    _countDownStr = DTimerFormat.hourMinuteSecond.format(millisUntilFinished);
                   });
                 }
               });
@@ -49,11 +53,11 @@ class _TimerPageState extends State<TimerPage> {
               if (timer1.isActive) {
                 return;
               }
-              timer1.setTotalTime(11 * 60 * 1000);
+              timer1.setTotalTimeWithSecond(11 * 60);
               timer1.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
-                    _countDownStr1 = DTimerCountdownFormat.minuteSecond.format(millisUntilFinished);
+                    _countDownStr1 = DTimerFormat.minuteSecond.format(millisUntilFinished);
                   });
                 }
               });
@@ -64,21 +68,38 @@ class _TimerPageState extends State<TimerPage> {
           ListTile(
             title: Text('ss点击开始倒计时: $_countDownStr2'),
             onTap: () {
-              final d = Duration(hours: 1,seconds: 60);
+              final d = Duration(hours: 1, seconds: 60);
               print(d.inMilliseconds);
-
+              print(d.inSeconds);
               if (timer2.isActive) {
                 return;
               }
-              timer2.setTotalTime(120 * 1000);
+              timer2.setTotalTimeWithSecond(120);
               timer2.setOnTimerCountdownCallback((millisUntilFinished) {
                 if (mounted) {
                   setState(() {
-                    _countDownStr2 = DTimerCountdownFormat.second.format(millisUntilFinished);
+                    _countDownStr2 = DTimerFormat.second.format(millisUntilFinished);
                   });
                 }
               });
               timer2.startCountDown();
+            },
+          ),
+          const Divider(),
+          ListTile(
+            title: Text('mm:ss点击计时: $_counterStr'),
+            onTap: () {
+              if (timer3.isActive) {
+                return;
+              }
+              timer3.setOnTimerCounterCallback((millisUntilFinished) {
+                if (mounted) {
+                  setState(() {
+                    _counterStr = DTimerFormat.hourMinuteSecond.formatWithSeconds(millisUntilFinished);
+                  });
+                }
+              });
+              timer3.startCounter();
             },
           ),
         ],
@@ -91,6 +112,7 @@ class _TimerPageState extends State<TimerPage> {
     timer.cancel();
     timer1.cancel();
     timer2.cancel();
+    timer3.cancel();
     super.dispose();
   }
 }

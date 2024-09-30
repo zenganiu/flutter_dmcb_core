@@ -13,7 +13,7 @@ class DTimerCountdown {
   bool _isActive = false;
 
   /// Timer间隔 单位毫秒，默认1000毫秒(1秒).
-  int _duration;
+  int _interval;
 
   /// 倒计时总时间,单位毫秒
   int _totalTime;
@@ -23,9 +23,9 @@ class DTimerCountdown {
 
   /// 初始化
   DTimerCountdown({
-    int duration = Duration.millisecondsPerSecond,
+    int interval = Duration.millisecondsPerSecond,
     int totalTime = 0,
-  })  : _duration = duration,
+  })  : _interval = interval,
         _totalTime = totalTime;
 
   /// 设置Timer间隔
@@ -34,13 +34,14 @@ class DTimerCountdown {
   void setDuration(int interval) {
     assert(interval > 0, '间隔应该大于0');
     if (interval <= 0) interval = Duration.millisecondsPerSecond;
-    _duration = interval;
+    _interval = interval;
   }
 
+  /// 设置Timer间隔
+  ///
+  /// [interval] 间隔,单位秒,小于0将默认1秒
   void setDurationFromSecond(int interval) {
-    assert(interval > 0, '间隔应该大于0');
-    if (interval <= 0) interval = Duration.millisecondsPerSecond;
-    _duration = Duration(seconds: interval).inMilliseconds;
+    setDuration(interval * 1000);
   }
 
   /// 设置倒计时
@@ -52,6 +53,13 @@ class DTimerCountdown {
     _totalTime = totalTime;
   }
 
+  /// 设置倒计时
+  ///
+  /// [totalTime] 总时间,单位秒,
+  void setTotalTimeWithSecond(int totalTime) {
+    setTotalTime(totalTime * 1000);
+  }
+
   void stop() {
     if (_isActive) {
       _mTimer?.cancel();
@@ -60,14 +68,14 @@ class DTimerCountdown {
 
   /// 启动倒计时Timer.
   void startCountDown() {
-    if (_isActive || _duration <= 0 || _totalTime <= 0) return;
+    if (_isActive || _interval <= 0 || _totalTime <= 0) return;
     _isActive = true;
-    Duration duration = Duration(milliseconds: _duration);
+    Duration duration = Duration(milliseconds: _interval);
     _doCallback(_totalTime);
     _mTimer = Timer.periodic(duration, (Timer timer) {
-      int time = _totalTime - _duration;
+      int time = _totalTime - _interval;
       _totalTime = time;
-      if (time >= _duration) {
+      if (time >= _interval) {
         _doCallback(time);
       } else if (time == 0) {
         _doCallback(time);
@@ -104,35 +112,45 @@ class DTimerCountdown {
   }
 }
 
-/// 倒计时输入格式
+/// 倒计时输出格式
+@Deprecated("use [DTimerFormat]")
 enum DTimerCountdownFormat {
-  /// 时分秒
+  /// 时分秒, 00:00:00
   hourMinuteSecond,
 
-  /// 分秒
+  /// 分秒,00:00
   minuteSecond,
 
-  /// 秒
+  /// 秒,0
   second,
 }
 
+@Deprecated("use [ExDTimerFormat]")
 extension ExCountdownFormat on DTimerCountdownFormat {
+  /// 倒计时输出格式化
+  /// [millisUntilFinished] 计时毫秒数
   String format(int millisUntilFinished) {
     final seconds = millisUntilFinished ~/ 1000;
+    return formatWithSeconds(seconds);
+  }
+
+  /// 倒计时输出格式化
+  /// [secondUntilFinished] 计时秒数
+  String formatWithSeconds(int secondUntilFinished) {
     switch (this) {
       case DTimerCountdownFormat.hourMinuteSecond:
-        final hour = (seconds ~/ 3600).floor();
-        final minute = ((seconds / 60) % 60).floor();
-        final second = (seconds % 60).floor();
+        final hour = (secondUntilFinished ~/ 3600).floor();
+        final minute = ((secondUntilFinished / 60) % 60).floor();
+        final second = (secondUntilFinished % 60).floor();
         final formatter = NumberFormat('00');
         return '$hour:${formatter.format(minute)}:${formatter.format(second)}';
       case DTimerCountdownFormat.minuteSecond:
-        final minute = (seconds ~/ 60).floor();
-        final second = (seconds % 60).floor();
+        final minute = (secondUntilFinished ~/ 60).floor();
+        final second = (secondUntilFinished % 60).floor();
         final formatter = NumberFormat('00');
         return '$minute:${formatter.format(second)}';
       case DTimerCountdownFormat.second:
-        return '${seconds.floor()}';
+        return '${secondUntilFinished.floor()}';
     }
   }
 }
