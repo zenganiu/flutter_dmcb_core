@@ -55,7 +55,8 @@ extension DcmbExString on String {
   /// [start] 起始位置
   /// [end] 结束位置
   /// [replacement] 替换内容
-  String dmReplaceString({int start = 3, int end = 7, String replacement = '****'}) {
+  String dmReplaceString(
+      {int start = 3, int end = 7, String replacement = '****'}) {
     if (start < 0 || length < end || start > end) return this;
     return replaceRange(start, end, replacement);
   }
@@ -83,7 +84,8 @@ extension DcmbExString on String {
 
   /// 是否是手机号码
   bool dmIsPhone() {
-    return dmRegExpMatch(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+    return dmRegExpMatch(
+        r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
   }
 
   /// 是否是正确的url
@@ -109,4 +111,7 @@ extension DcmbExString on String {
 
   /// jsonString转换为对象
   dynamic get dmToJson => DUtils.jsonDecode(this);
+
+  /// 转化成DateTime
+  DateTime? get dmToDateTime => DateTime.tryParse(this);
 }
