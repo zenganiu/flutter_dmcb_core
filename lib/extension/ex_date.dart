@@ -19,4 +19,10 @@ extension DcmbExDate on DateTime {
 
   /// 时间是否是过去
   bool get dmIsPast => isBefore(DateTime.now());
+
+  /// yyyy-MM-dd样式日期
+  String get dmToDateStr => dmFormat(pattern: 'yyyy-MM-dd');
+
+  /// yyyy-MM-dd HH:mm:ss样式时间
+  String get dmToTimeStr => dmFormat();
 }
