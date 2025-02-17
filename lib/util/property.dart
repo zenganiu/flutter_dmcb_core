@@ -49,5 +49,6 @@ mixin DProperty {
   double get bottomBarHeight => ui.window.padding.bottom / pixelRatio;
 
   /// 是否暗黑模式
-  bool get isPlatformDarkMode => (ui.window.platformBrightness == ui.Brightness.dark);
+  bool get isPlatformDarkMode =>
+      (ui.window.platformBrightness == ui.Brightness.dark);
 }

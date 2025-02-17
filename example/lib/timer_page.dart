@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
@@ -68,9 +69,11 @@ class _TimerPageState extends State<TimerPage> {
           ListTile(
             title: Text('ss点击开始倒计时: $_countDownStr2'),
             onTap: () {
-              final d = Duration(hours: 1, seconds: 60);
-              print(d.inMilliseconds);
-              print(d.inSeconds);
+              const d = Duration(hours: 1, seconds: 60);
+              if (kDebugMode) {
+                print(d.inMilliseconds);
+                print(d.inSeconds);
+              }
               if (timer2.isActive) {
                 return;
               }
