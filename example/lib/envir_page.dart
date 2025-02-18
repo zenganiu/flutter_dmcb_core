@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dmcb_core/flutter_dmcb_core.dart';
 
 class EnvirPage extends StatefulWidget {
-  EnvirPage({Key? key}) : super(key: key);
+  const EnvirPage({Key? key}) : super(key: key);
 
   @override
   _EnvirPageState createState() => _EnvirPageState();

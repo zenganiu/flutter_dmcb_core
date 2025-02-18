@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
             title: const Text('Env'),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-                return EnvirPage();
+                return const EnvirPage();
               }));
             },
           ),

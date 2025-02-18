@@ -1,3 +1,6 @@
+
+## 已不在更新，请使用[flutter_base_core](https://github.com/zenganiu/flutter_base_core)
+
 # flutter_dmcb_core
 Flutter基础库
 
